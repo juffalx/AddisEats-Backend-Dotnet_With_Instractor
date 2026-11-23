@@ -32,9 +32,23 @@ public class OrderController : ControllerBase
 
     public ActionResult<Order> CreateOrder([FromBody] CreatOrderDTO createDTO)
     {
-        var order = _orderService.CreateOrder(createDTO);
+        var result = _orderService.CreateOrder(createDTO);
 
-        return CreatedAtAction(nameof(GetById) , new {id = order.Id }, order);
+        if (!result.IsSuccess)
+        {
+            return Problem(
+                title: result.Error?.Message,
+                statusCode:result.Error?.Status,
+                detail:result.Error?.Code
+            );
+        }
+
+        var order = result.Value;
+
+        return CreatedAtAction(
+            nameof(GetById), 
+            new {id = order.Id }, 
+            order);
     }
 
 

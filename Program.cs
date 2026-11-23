@@ -19,6 +19,14 @@ Console.WriteLine("free above etb");
 
 var app = builder.Build();
 
+
+app.Use(async (context, next) => {
+    Console.WriteLine("The Reauest is coming in");
+    
+    await next(context);
+    
+    Console.WriteLine("The Request is going out 1");
+    });
 // Configure request pipeline
 if (app.Environment.IsDevelopment())
 {
