@@ -36,6 +36,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// app.UseCors("frontend");
+
+app.UseMiddleware<RequestTimingMiddleware>();
 app.UseAuthentication();
 
 app.UseAuthorization();

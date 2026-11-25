@@ -25,5 +25,6 @@ public class ETBAmountAttribute : ValidationAttribute
                 "Amount cannot have more than two decimal places"
             );
         }
+    return ValidationResult.Success;
     }
 }
