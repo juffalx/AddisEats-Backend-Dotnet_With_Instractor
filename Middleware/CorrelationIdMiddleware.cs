@@ -1,3 +1,4 @@
+namespace AddisEats.Api.Middleware;
 public class CorrelationIdMiddleware
 {
     private readonly RequestDelegate _next;

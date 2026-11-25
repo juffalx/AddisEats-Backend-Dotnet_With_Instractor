@@ -1,6 +1,7 @@
 ﻿using AddisEats.Api.Services.MenuItemServices;
 using AddisEats.Api.Service.RestaurantServices;
 using AddisEats.Api.Services.OrderService;
+using AddisEats.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,7 +38,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // app.UseCors("frontend");
-
+app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<RequestTimingMiddleware>();
 app.UseAuthentication();
 
