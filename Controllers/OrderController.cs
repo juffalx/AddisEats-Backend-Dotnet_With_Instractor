@@ -20,7 +20,7 @@ public class OrderController : ControllerBase
     {
         var order = _orderService.GetById(id);
 
-        if(order == null)
+        if (order == null)
         {
             return NotFound();
         }
@@ -28,7 +28,48 @@ public class OrderController : ControllerBase
         return Ok(order);
     }
 
+    /// <summary>
+    ///     Places a new order for delivery
+    /// </summary>
+    /// <param name="request">
+    ///     Contains the restaurant delivery area and order item
+    /// </param>
+    /// 
+    /// <response code="201">
+    ///     The order Succesfully Placed.
+    /// </response>
+    /// 
+    /// <response code = "400">
+    ///     The submitted request contains invalid data.
+    /// </response>
+    /// 
+    /// <response code="404">
+    ///     The requested restaurant was not found.
+    /// </response>
+    /// 
+    /// <response code="409">
+    ///     The order conflicts with the current restaurant state.
+    /// </response>
     [HttpPost]
+    [ProducesResponseType(
+        typeof(Order),
+        StatusCodes.Status201Created
+    )]
+
+    [ProducesResponseType(
+        typeof(ValidationProblemDetails),
+        StatusCodes.Status404NotFound
+    )]
+    [ProducesResponseType(
+        typeof(ProblemDetails),
+        StatusCodes.Status404NotFound
+    )]
+
+    [ProducesResponseType(
+        typeof(ProblemDetails),
+        StatusCodes.Status409Conflict
+    )]
+
 
     public ActionResult<Order> CreateOrder([FromBody] CreatOrderDTO createDTO)
     {
@@ -38,19 +79,19 @@ public class OrderController : ControllerBase
         {
             return Problem(
                 title: result.Error?.Message,
-                statusCode:result.Error?.Status,
-                detail:result.Error?.Code
+                statusCode: result.Error?.Status,
+                detail: result.Error?.Code
             );
         }
 
         var order = result.Value;
 
         return CreatedAtAction(
-            nameof(GetById), 
-            new {id = order.Id }, 
+            nameof(GetById),
+            new { id = order.Id },
             order);
     }
 
 
-    
+
 }

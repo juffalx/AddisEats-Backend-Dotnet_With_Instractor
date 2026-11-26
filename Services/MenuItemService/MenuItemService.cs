@@ -2,7 +2,7 @@ using AddisEats.Api.Models;
 
 namespace AddisEats.Api.Services.MenuItemServices;
 
-public class MenuItemService : IMenuInterfaceService
+public class MenuItemService : IMenuItemService
 {
     private readonly List<MenuItem> _menuItems;
 

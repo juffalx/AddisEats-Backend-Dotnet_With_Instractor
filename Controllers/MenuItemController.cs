@@ -8,10 +8,10 @@ namespace AddisEats.Api.Controllers;
 [Route("api/v1/[Controller]")]
 
 public class MenuItemController : ControllerBase{
-    private readonly IMenuInterfaceService _menuItemService;
+    private readonly IMenuItemService _menuItemService;
     // variable 
 
-    public MenuItemController(IMenuInterfaceService menuItemSerice)
+    public MenuItemController(IMenuItemService menuItemSerice)
     {
         _menuItemService = menuItemSerice;
     }

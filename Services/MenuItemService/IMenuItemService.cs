@@ -2,7 +2,7 @@ using AddisEats.Api.Models;
 
 namespace AddisEats.Api.Services.MenuItemServices;
 
-public interface IMenuInterfaceService
+public interface IMenuItemService
 {
     List<MenuItem> GetAll(string? category,  int? upPrice);
 
